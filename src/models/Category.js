@@ -15,4 +15,6 @@ const CategorySchema = new mongoose.Schema({
 
 CategorySchema.index({ name: 1, companyId: 1 }, { unique: true });  //l’index aide à chercher vite, et unique interdit les doublons
 
-module.exports = mongoose.model("Category", CategorySchema);
+const Category = mongoose.model("Category", CategorySchema);
+
+module.exports = { Category };
