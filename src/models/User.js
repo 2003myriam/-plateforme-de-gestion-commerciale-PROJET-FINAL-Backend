@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
   name: {type: String,required: true},
   email: {type: String,required: true,unique: true},
   password: {type: String,required: true},
-  phone:{type:Number,required :true},
+  phone:{type:Number,required :true,unique: true},
   role:{type:String, enum:[ "founder",
       "product_manager",
       "customer_service",
@@ -12,10 +12,10 @@ const UserSchema = new mongoose.Schema({
       "hr",
       "employee"],default:'employee'},
   created_at:{type:Date ,default:Date.now()},
+  status:{type:String,enum:["pending","approved","rejected"]},
   companyId:{
       type:mongoose.Schema.Types.ObjectId,
       ref:"Company",
-      required:true,
     },
 
 })
