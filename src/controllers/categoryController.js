@@ -6,19 +6,13 @@ class CategoryController {
   async addcategory(req, res, next) {
     try {
       const { name } = req.body;
-      const companyId = req.params.id;
+       
 
-      const findCompanybyId = await Company.findById(companyId);
-
-      if (!findCompanybyId) {
-        return res.status(404).json({
-          message: "Company not found",
-        });
-      }
-
+      
       const newCategory = await Category.create({
         name,
-        companyId
+        companyId: req.user.companyId
+        
       });
 
       res.status(201).json({

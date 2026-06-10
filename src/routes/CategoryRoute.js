@@ -10,7 +10,7 @@ const router =express.Router();
 
 
  
-router.post("/category/:id",verifyToken,authorize(["founder",]),categoryController.addcategory )
+router.post("/category",verifyToken,authorize(["founder"]),categoryController.addcategory )
 router.get("/categories", verifyToken,categoryController.GetAllCategoryOfSamecompany)
  
 
