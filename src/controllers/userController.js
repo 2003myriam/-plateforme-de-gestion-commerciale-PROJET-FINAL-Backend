@@ -8,7 +8,8 @@ class UserController {
   /* ======== GET STARTED (Founder + Company) ======== */
   async founder(req, res, next) {
     try {
-
+      console.log(req.body);
+      
       const { name, email, password, phone, companyName, companyEmail} = req.body;
       // 1. Create founder
       const newFounder = await User.create({
@@ -35,8 +36,8 @@ class UserController {
       newFounder.companyId = newCompany._id;
       await newFounder.save();
 
-      return res.json({
-        message: "Founder and Company created successfully",
+       res.json({
+        "message": "Founder and Company created successfully",
         founder: newFounder,
         company: newCompany
       });
@@ -49,42 +50,45 @@ class UserController {
   
 /* ========== User register ============= */
   async UserRegister(req, res, next) {
-      try {
-        const { name, email, password, phone,role,joinCode} = req.body; // ce qui remplis l'utilisateur 
-        const company=await Company.findOne({joinCode}); //trouver company avec ce joincode
-        if (!company) {
-        return res.json({
-        message: " invalide code ",
-      });}
-       if (new Date() > company.expiresAt) {
-        return res.json({
-        message: " expeer code  ",
-      });}
-        else{
-        // 1. Create user
-        const newUser = await User.create({
-          name,
-          email,
-          password,
-          phone,
-          role,
-          status:"pending",
-          companyId:company._id
-        })
-        return res.json({
-        message: "waiting approval",
-        newUser
-      });
-        }
-       
-      } catch (error) {
-        next(error);
-      }
+  try {
+    console.log(req.body);
+
+    const { name, email, password, phone, role, joinCode } = req.body;
+
+    const company = await Company.findOne({ joinCode });
+
+    if (!company) {
+      return res.status(400).json({ message: "Invalid code" });
     }
+
+    if (new Date() > company.expiresAt) {
+      return res.status(400).json({ message: "Expired code" });
+    }
+
+    const newUser = await User.create({
+      name,
+      email,
+      password,
+      phone,
+      role,
+      status: "pending",
+      companyId: company._id
+    });
+
+    return res.json({
+      message: "waiting approval",
+      newUser
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
 
 /* ========== User login ============= */
   async  login(req,res,next){
   try {
+  console.log(req.body);
   const{email,password}=req.body
    /* ______Trouver un user deja existant de notre BDD avec findOne _______ */
   const findUser=await User.findOne({email,password}) 
