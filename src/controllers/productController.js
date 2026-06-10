@@ -6,8 +6,8 @@ class ProductController{
   async  AddProduct(req,res,next) {
     try{
     console.log(req.body);
-    const {title, description,sku,image,stockQuantity,price,stockMin,CategoryId}=req.body
-    const newProduct=await Product.insertOne({title, description,sku,image,stockQuantity,price,stockMin,CategoryId,companyId: req.user.companyId})
+    const {title, description,sku,image,stockQuantity,price,stockMin,categoryId}=req.body
+    const newProduct=await Product.insertOne({title, description,sku,image,stockQuantity,price,stockMin,categoryId,companyId: req.user.companyId})
     res.json({
    "message" : `The Product ${title} is succesfuly create `,
     data:newProduct
@@ -24,7 +24,8 @@ class ProductController{
 async  GetAllProduct(req,res,next){
   try {
   const getALLproduct = await Product.find({companyId: req.user.companyId})
-
+ console.log(getALLproduct);
+ 
   res.json({
    "message" : `All Product  `,
     getALLproduct
