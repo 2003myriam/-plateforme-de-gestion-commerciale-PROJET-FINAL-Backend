@@ -34,7 +34,28 @@ async  GetAllProduct(req,res,next){
       next(error)
   }
 }
-
+/* ================================================= */
+/* =====Getting all Products of same  category==== */
+/* ================================================ */
+async  GetAllProductOfCategory(req,res,next){
+  try {
+   
+    const categoryId = req.params.categoryId;
+    console.log(`le id de la category est : ${categoryId}`);
+    
+    const getproduct = await Product.find({
+      categoryId,
+      companyId: req.user.companyId
+    });
+  
+  res.json({
+   "message" : `All Product in  this category`,
+    getproduct
+  })
+  } catch (error) {
+      next(error)
+  }
+}
 
 }
 
