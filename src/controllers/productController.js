@@ -2,7 +2,10 @@ const {Product} =require("../models/Product")
 class ProductController{
 
 
-  /* ______Adding Product_________ */
+ 
+  /* ================================================= */
+/* ================Adding Product===================== */
+/* ================================================ */
   async  AddProduct(req,res,next) {
     try{
     console.log(req.body);
@@ -56,6 +59,38 @@ async  GetAllProductOfCategory(req,res,next){
       next(error)
   }
 }
+/* ================================================= */
+/* ===================Delete product=============== */
+/* ================================================ */
+
+
+
+/* ===========A revoir car je ne pr"cise pas qiel company peut supprimer ==================== */
+async  DeletProduct(req,res,next) {
+    try{
+    const productId=req.params.id
+    /* ____Chercher le Produit par son ID _______ */
+    const findProductbyId=await Product.findOne({_id:productId,
+       companyId: req.user.companyId
+    })
+    /* _______si Pas de ID donc produit n'existe pas ______ */
+    if (!findProductbyId) {
+      const error = new Error(" Product not found");
+      error.status = 404;
+       return next(error)
+    }
+    /* ___Supprimer le produit_____ */
+    const deleteProduct=await Product.deleteOne({_id:productId,  companyId: req.user.companyId})
+    res.json({
+   "message" : `The Product  is succesfuly deleted `,
+  })
+    }
+    catch(error){
+       return next(error)
+    }
+  }
+
+  
 
 }
 
