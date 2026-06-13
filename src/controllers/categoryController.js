@@ -34,7 +34,7 @@ async GetAllCategoryOfSamecompany(req, res, next) {
     console.log("COMPANY ID FROM USER:", req.user.companyId);
 
     res.json({
-      message: "All categories of this company",
+       
       data: categories
     });
 

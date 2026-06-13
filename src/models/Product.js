@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
   sku: { type: String }, // réference du produit
   price: { type: Number, required: true },
   stockQuantity: { type: Number, default: 0 },
-  stockMin: { type: Number, default: 0 },
+  stockInitial: { type: Number, default: 0 },
   companyId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Company",

@@ -9,8 +9,8 @@ class ProductController{
   async  AddProduct(req,res,next) {
     try{
     console.log(req.body);
-    const {title, description,sku,image,stockQuantity,price,stockMin,categoryId}=req.body
-    const newProduct=await Product.insertOne({title, description,sku,image,stockQuantity,price,stockMin,categoryId,companyId: req.user.companyId})
+    const {title, description,sku,image,stockQuantity,price,stockInitial,categoryId}=req.body
+    const newProduct=await Product.insertOne({title, description,sku,image,stockQuantity,price,stockInitial,categoryId,companyId: req.user.companyId})
     res.json({
    "message" : `The Product ${title} is succesfuly create `,
     data:newProduct
@@ -24,17 +24,19 @@ class ProductController{
    /* ================================================= */
 /* =====Getting all Products  of same company ==== */
 /* ================================================ */
-async  GetAllProduct(req,res,next){
+async GetAllProduct(req, res, next) {
   try {
-  const getALLproduct = await Product.find({companyId: req.user.companyId})
- console.log(getALLproduct);
- 
-  res.json({
-   "message" : `All Product  `,
-    getALLproduct
-  })
+    const getALLproduct = await Product.find({
+      companyId: req.user.companyId
+    }).populate("categoryId");
+
+    res.json({
+      message: "All Products",
+      getALLproduct
+    });
+
   } catch (error) {
-      next(error)
+    next(error);
   }
 }
 /* ================================================= */
@@ -63,9 +65,6 @@ async  GetAllProductOfCategory(req,res,next){
 /* ===================Delete product=============== */
 /* ================================================ */
 
-
-
-/* ===========A revoir car je ne pr"cise pas qiel company peut supprimer ==================== */
 async  DeletProduct(req,res,next) {
     try{
     const productId=req.params.id

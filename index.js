@@ -13,6 +13,7 @@ const port = process.env.PORT || 5000;
 const  UserRoute=require("./src/routes/userRoute")
 const CategoryRoute=require("./src/routes/CategoryRoute")
 const  ProductRoute=require("./src/routes/ProductRoute")
+const TaskRoute=require("./src/routes/TaskRoute")
 
 
 app.use(express.json());
@@ -22,6 +23,7 @@ connectDB();
 app.use("/user",UserRoute)
 app.use("/category",CategoryRoute)
 app.use("/products",ProductRoute)
+app.use("/tasks",TaskRoute)
 
 
 /* ____on importe l'erreur a la fin  pour que ErrorHndler fonctionne_____ */
