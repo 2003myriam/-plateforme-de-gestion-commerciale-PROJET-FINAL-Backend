@@ -57,6 +57,38 @@ async  DeletTask(req,res,next) {
     }
   }
 
+ /* ______Modify Task_________ */
+async  ModifyTaskUser(req,res,next) {
+    try{
+
+    const taskId=req.params.id
+    const {status}=req.body
+    const userId = req.user.id; // utilisateur connecté 
+
+    /* ____Chercher la tache  par son ID _______ */
+    const findTaskbyId=await Task.findOne({_id:taskId})
+   
+      // 2. vérifier si la personne est assignée
+    if (findTaskbyId.assignedTo.toString() !== userId) {
+      return res.status(403).json({
+        message: "You are not allowed to modify this task"
+      });
+    }
+
+    // 3. update
+    findTask.status = status;
+    await findTask.save();
+    res.json({
+   "message" : `The Task is succesfuly updated `,
+  
+  })
+    }
+    catch(error){
+       return next(error)
+    }
+  }
+
+
 
 
 }

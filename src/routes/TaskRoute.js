@@ -11,6 +11,7 @@ const router =express.Router();
 router.post("/task",verifyToken,authorize(["founder","hr"]),TaskController.addtask)
  router.get("/task",verifyToken,TaskController.gettask)
  router.delete("/task/:id",verifyToken,authorize(["founder","hr"]),TaskController.DeletTask)
+ router.put("/task/:id",verifyToken,TaskController.ModifyTaskUser)
  
 
  
