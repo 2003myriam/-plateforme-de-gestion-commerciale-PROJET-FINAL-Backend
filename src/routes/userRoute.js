@@ -11,6 +11,8 @@ router.post("/register",UserController.UserRegister)
 router.post("/login",UserController.login)
 router.get("/dashboard",verifyToken,authorizestatus(),(req,res)=> res.json({message:"welcome"}))
 
+router.get("/users",verifyToken,UserController.AllUserOfSameCompny)
+
  
 
 module.exports= router;

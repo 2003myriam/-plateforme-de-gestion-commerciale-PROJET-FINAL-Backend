@@ -116,6 +116,17 @@ class UserController {
     next(error)
   }
 }
+/* ======= get all user of same company========== */
+async  AllUserOfSameCompny(req,res,next){
+  try {
+  const findUsers=await User.find({companyId: req.user.companyId}) 
+  res.json({
+    data:findUsers   
+  })
+  } catch (error) { 
+    next(error)
+  }
+}
 
 }
 
