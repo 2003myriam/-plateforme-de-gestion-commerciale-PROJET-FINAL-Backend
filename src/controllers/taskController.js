@@ -27,7 +27,7 @@ class TaskController{
       try {
         const getTask = await Task.find({
            companyId: req.user.companyId
-        });
+        }).populate("assignedTo");
   
         res.json({
           message: "ALL task",
@@ -37,6 +37,27 @@ class TaskController{
         next(error);
       }
     }
+/* =======delete tasks ============= */
+async  DeletTask(req,res,next) {
+    try{
+    const taskId=req.params.id
+    /* ____Chercher le Produit par son ID _______ */
+    const findtaskbyId=await Task.findOne({_id:taskId,
+       companyId: req.user.companyId
+    })
+    
+    /* ___Supprimer la tache_____ */
+    const deleteTask=await Task.deleteOne({_id:taskId,  companyId: req.user.companyId})
+    res.json({
+   "message" : `The task  is succesfuly deleted `,
+  })
+    }
+    catch(error){
+       return next(error)
+    }
+  }
+
+
 
 }
 module.exports = new TaskController();
