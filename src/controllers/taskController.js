@@ -88,7 +88,24 @@ async  ModifyTaskUser(req,res,next) {
     }
   }
 
-
+/* ===================================== */
+/* =========Personnel task ============= */
+/* ===================================== */
+async addPersotask(req, res, next) {
+      try {
+        const { title,description,priority,status} = req.body;
+        const newTask = await Task.create({
+          title,description,priority,status, 
+         companyId: req.user.companyId
+        });
+        res.status(201).json({
+          message: "task created successfully",
+          Task: newTask,
+        });
+      } catch (error) {
+        next(error);
+      }
+    }
 
 
 }

@@ -12,6 +12,7 @@ router.post("/task",verifyToken,authorize(["founder","hr"]),TaskController.addta
  router.get("/task",verifyToken,TaskController.gettask)
  router.delete("/task/:id",verifyToken,authorize(["founder","hr"]),TaskController.DeletTask)
  router.put("/task/:id",verifyToken,TaskController.ModifyTaskUser)
+
  
 
  
