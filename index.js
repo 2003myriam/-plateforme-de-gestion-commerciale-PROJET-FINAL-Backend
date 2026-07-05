@@ -15,6 +15,7 @@ const CategoryRoute=require("./src/routes/CategoryRoute")
 const  ProductRoute=require("./src/routes/ProductRoute")
 const TaskRoute=require("./src/routes/TaskRoute")
 const PersoTaskRoute=require("./src/routes/PersonnelTaskRoute")
+const SheduleRoute=require("./src/routes/PlanningRoute")
 
 
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use("/category",CategoryRoute)
 app.use("/products",ProductRoute)
 app.use("/tasks",TaskRoute)
 app.use("/persotasks",PersoTaskRoute)
+app.use("/shedules",SheduleRoute)
 
 
 /* ____on importe l'erreur a la fin  pour que ErrorHndler fonctionne_____ */

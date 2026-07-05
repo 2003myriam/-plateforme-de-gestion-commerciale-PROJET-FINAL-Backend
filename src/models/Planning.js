@@ -27,7 +27,7 @@ const PlanningSchema = new mongoose.Schema({
     type: String
   },
 
-  userId: {
+  assignTo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
@@ -39,5 +39,5 @@ const PlanningSchema = new mongoose.Schema({
     required: true
   },
 });
-
-module.exports = mongoose.model("Planning", PlanningSchema);
+const Planning= mongoose.model("Planning", PlanningSchema);
+module.exports = {Planning}
