@@ -127,7 +127,40 @@ async  AllUserOfSameCompny(req,res,next){
     next(error)
   }
 }
+/* ======= get all user of same company & status == "pending"========== */
+async AllPendingUsers(req, res, next) {
+  try {
 
+    const findUsers = await User.find({
+      companyId: req.user.companyId,
+      status: "pending"
+    });
+
+    res.json({
+      data: findUsers
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
+/* ==========Update user status============ */
+  async UpdateUser(req, res, next) {
+  try {
+  const { status } = req.body
+  const Userid=req.params.id
+     const userUpdated=await User.findByIdAndUpdate({_id:Userid},{status})
+     res.json({
+
+    "message":"User is succesfully  updated",
+     data: userUpdated,
+    
+  })
+  } 
+  catch (error) {
+    next(error)
+  }}
 }
 
 
