@@ -144,6 +144,23 @@ async AllPendingUsers(req, res, next) {
     next(error);
   }
 }
+/* ======= get all user of same company & status == "approved"========== */
+async AllApprovedUsers(req, res, next) {
+  try {
+
+    const findUsers = await User.find({
+      companyId: req.user.companyId,
+      status: "approved"
+    });
+
+    res.json({
+      data: findUsers
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
 
 /* ==========Update user status============ */
   async UpdateUser(req, res, next) {

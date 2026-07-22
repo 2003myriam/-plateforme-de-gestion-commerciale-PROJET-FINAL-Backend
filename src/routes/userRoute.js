@@ -11,6 +11,7 @@ router.post("/login",UserController.login)
 router.get("/dashboard",verifyToken,authorizestatus(),(req,res)=> res.json({message:"welcome"}))
 router.get("/users",verifyToken,UserController.AllUserOfSameCompny)
 router.get("/pendingusers",verifyToken,UserController.AllPendingUsers)
+router.get("/approvedusers",verifyToken,UserController.AllApprovedUsers)
 router.put("/updateusers/:id",verifyToken,authorize(["founder"]),UserController.UpdateUser)
  
 
