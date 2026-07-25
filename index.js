@@ -16,6 +16,7 @@ const  ProductRoute=require("./src/routes/ProductRoute")
 const TaskRoute=require("./src/routes/TaskRoute")
 const PersoTaskRoute=require("./src/routes/PersonnelTaskRoute")
 const GenerateCodeRoute=require("./src/routes/CodeRoute")
+const customerRoute=require("./src/routes/ClientRoute")
  
 
 
@@ -29,6 +30,7 @@ app.use("/products",ProductRoute)
 app.use("/tasks",TaskRoute)
 app.use("/persotasks",PersoTaskRoute)
 app.use("/code",GenerateCodeRoute)
+app.use("/customers",customerRoute)
  
 
 

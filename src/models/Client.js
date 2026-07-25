@@ -5,6 +5,10 @@ const ClientSchema = new mongoose.Schema({
   email: { type: String, required: true },
   phone: { type: Number, required: true },
   wilaya: { type: String },
+  badge:{type:String, enum:[ "vip",
+      "new",
+      "regular",
+      ],default:'regular'},
   companyId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Company",
