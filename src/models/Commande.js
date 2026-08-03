@@ -16,6 +16,33 @@ const CommandeSchema = new mongoose.Schema({
     ref: "Company",
     required: true
   },
+  /* ========== un tableau de produit pour chaque commande de client ========= */
+    products: [
+    {
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true
+      },
+
+      quantity: {
+        type: Number,
+        required: true,
+        min: 1
+      },
+
+      unitPrice: {
+        type: Number,
+        required: true
+      },
+
+      subtotal: {
+        type: Number,
+        required: true
+      }
+    }
+  ],
+
 });
 
 

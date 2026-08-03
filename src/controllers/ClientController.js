@@ -36,5 +36,23 @@ class ClientController{
         next(error);
       }
     }
+    /* filtring customers by name or wilaya */
+    async filterCustomers(req, res, next) {
+      try {
+        const name=req.query.name
+        const wilaya=req.query.wilaya
+        const filtercustomer = await Client.find({
+          companyId: req.user.companyId
+        })
+    
+        res.json({
+          message: "All Customers",
+          getALLcustomer
+        });
+    
+      } catch (error) {
+        next(error);
+      }}
+
 }
 module.exports=new ClientController 

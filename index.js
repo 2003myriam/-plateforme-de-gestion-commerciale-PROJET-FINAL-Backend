@@ -17,7 +17,7 @@ const TaskRoute=require("./src/routes/TaskRoute")
 const PersoTaskRoute=require("./src/routes/PersonnelTaskRoute")
 const GenerateCodeRoute=require("./src/routes/CodeRoute")
 const customerRoute=require("./src/routes/ClientRoute")
- 
+const commandeRoute=require("./src/routes/CommandeRoute")
 
 
 app.use(express.json());
@@ -31,7 +31,7 @@ app.use("/tasks",TaskRoute)
 app.use("/persotasks",PersoTaskRoute)
 app.use("/code",GenerateCodeRoute)
 app.use("/customers",customerRoute)
- 
+app.use("/orders",commandeRoute)
 
 
 /* ____on importe l'erreur a la fin  pour que ErrorHndler fonctionne_____ */

@@ -23,6 +23,7 @@ class ProductController{
 /* ================================================ */
 async GetAllProduct(req, res, next) {
   try {
+    
     const getALLproduct = await Product.find({
       companyId: req.user.companyId
     }).populate("categoryId");
