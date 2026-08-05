@@ -54,7 +54,7 @@ class CommandeController{
   for (let index = 0; index < products.length; index++) {
     const findproduct=await Product.findById(products[index].productId)
     findproduct.stockQuantity=findproduct.stockQuantity-products[index].quantity 
-    await Product.save()
+    await findproduct.save()
   }
   
 
