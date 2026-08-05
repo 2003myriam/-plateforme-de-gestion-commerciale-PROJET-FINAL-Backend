@@ -47,6 +47,17 @@ class CommandeController{
    "message" : ` new order is add `,
     data:newOrder
   })
+  console.log( newOrder.products.length);
+  
+  
+  /* =========== Reglage du stock apres creation de la commande ====== */
+  for (let index = 0; index < products.length; index++) {
+    const findproduct=await Product.findById(products[index].productId)
+    findproduct.stockQuantity=findproduct.stockQuantity-products[index].quantity 
+    await Product.save()
+  }
+  
+
 }
     catch(error){
       console.log(error)
