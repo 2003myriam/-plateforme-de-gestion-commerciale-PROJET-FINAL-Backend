@@ -29,7 +29,7 @@ class ClientController{
     
         res.json({
           message: "All Customers",
-          getALLcustomer
+          data:getALLcustomer
         });
     
       } catch (error) {

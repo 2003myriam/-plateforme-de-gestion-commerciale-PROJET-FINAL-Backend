@@ -30,7 +30,7 @@ async GetAllProduct(req, res, next) {
 
     res.json({
       message: "All Products",
-      getALLproduct
+      data:getALLproduct
     });
 
   } catch (error) {
