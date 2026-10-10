@@ -53,7 +53,7 @@ async  GetAllProductOfCategory(req,res,next){
   
   res.json({
    "message" : `All Product in  this category`,
-    getproduct
+    data:getproduct
   })
   } catch (error) {
       next(error)

@@ -1,4 +1,4 @@
-const {PersoTask} = require("../models/PersoTask");
+const {PersoTask} = require("../models/persoTask");
 const { User } = require("../models/User");
 
 class PersonnelTaskController{
