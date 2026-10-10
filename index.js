@@ -20,24 +20,35 @@ const customerRoute=require("./src/routes/ClientRoute")
 const commandeRoute=require("./src/routes/CommandeRoute")
 
 
+ 
 app.use(express.json());
-connectDB();
 
+// Déclarer les routes
+app.use("/user", UserRoute);
+app.use("/category", CategoryRoute);
+app.use("/products", ProductRoute);
+app.use("/tasks", TaskRoute);
+app.use("/persotasks", PersoTaskRoute);
+app.use("/code", GenerateCodeRoute);
+app.use("/customers", customerRoute);
+app.use("/orders", commandeRoute);
 
-app.use("/user",UserRoute)
-app.use("/category",CategoryRoute)
-app.use("/products",ProductRoute)
-app.use("/tasks",TaskRoute)
-app.use("/persotasks",PersoTaskRoute)
-app.use("/code",GenerateCodeRoute)
-app.use("/customers",customerRoute)
-app.use("/orders",commandeRoute)
-
-
-/* ____on importe l'erreur a la fin  pour que ErrorHndler fonctionne_____ */
+// Middleware d'erreur à la fin
 const { ErrorFunction } = require("./src/Middlewares/ErrorHndler");
-app.use(ErrorFunction)
+app.use(ErrorFunction);
 
-app.listen(port, () => {
-  console.log("serveur is running on port " + port);
-});
+// Démarrer le serveur seulement après la connexion MongoDB
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(port, () => {
+      console.log("Serveur démarré sur le port " + port);
+    });
+  } catch (error) {
+    console.error("Impossible de démarrer le serveur :", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
